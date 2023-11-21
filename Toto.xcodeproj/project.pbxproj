@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D395F272B0CDED7002BE236 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D395F262B0CDED7002BE236 /* Dish.swift */; };
+		8D395F292B0CE2EC002BE236 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D395F282B0CE2EC002BE236 /* HomeView.swift */; };
+		8D395F2B2B0CE300002BE236 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D395F2A2B0CE300002BE236 /* FavoritesView.swift */; };
+		8D395F2D2B0CE31C002BE236 /* RecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D395F2C2B0CE31C002BE236 /* RecipeRow.swift */; };
 		8DF713DD2B0B6C3700346E98 /* TotoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF713DC2B0B6C3700346E98 /* TotoApp.swift */; };
 		8DF713DF2B0B6C3700346E98 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF713DE2B0B6C3700346E98 /* ContentView.swift */; };
 		8DF713E12B0B6C3A00346E98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DF713E02B0B6C3A00346E98 /* Assets.xcassets */; };
@@ -14,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D395F262B0CDED7002BE236 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		8D395F282B0CE2EC002BE236 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8D395F2A2B0CE300002BE236 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		8D395F2C2B0CE31C002BE236 /* RecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRow.swift; sourceTree = "<group>"; };
 		8DF713D92B0B6C3700346E98 /* Toto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF713DC2B0B6C3700346E98 /* TotoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotoApp.swift; sourceTree = "<group>"; };
 		8DF713DE2B0B6C3700346E98 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,7 +59,11 @@
 		8DF713DB2B0B6C3700346E98 /* Toto */ = {
 			isa = PBXGroup;
 			children = (
+				8D395F282B0CE2EC002BE236 /* HomeView.swift */,
+				8D395F262B0CDED7002BE236 /* Dish.swift */,
 				8DF713DC2B0B6C3700346E98 /* TotoApp.swift */,
+				8D395F2A2B0CE300002BE236 /* FavoritesView.swift */,
+				8D395F2C2B0CE31C002BE236 /* RecipeRow.swift */,
 				8DF713DE2B0B6C3700346E98 /* ContentView.swift */,
 				8DF713E02B0B6C3A00346E98 /* Assets.xcassets */,
 				8DF713E22B0B6C3A00346E98 /* Preview Content */,
@@ -137,6 +149,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D395F2B2B0CE300002BE236 /* FavoritesView.swift in Sources */,
+				8D395F272B0CDED7002BE236 /* Dish.swift in Sources */,
+				8D395F2D2B0CE31C002BE236 /* RecipeRow.swift in Sources */,
+				8D395F292B0CE2EC002BE236 /* HomeView.swift in Sources */,
 				8DF713DF2B0B6C3700346E98 /* ContentView.swift in Sources */,
 				8DF713DD2B0B6C3700346E98 /* TotoApp.swift in Sources */,
 			);
