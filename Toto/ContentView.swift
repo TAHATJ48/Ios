@@ -1,15 +1,24 @@
 import SwiftUI
 import PhotosUI
 
+struct RecipeDetails: Identifiable {
+    let id = UUID()
+    let name: String
+    let difficulty: Int
+    let date: Date
+}
 struct RecipeRow: View {
-    let recipe: String
+    let recipeDetails: RecipeDetails
     let imageData: Data?
     let isFavorite: Binding<Bool>
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(recipe)
+                Text("Recipe Name: \(recipeDetails.name)")
+                Text("Difficulty: \(recipeDetails.difficulty)")
+                Text("Date: \(recipeDetails.date.formatted())")
+                
                 if let imageData = imageData,
                    let uiImage = UIImage(data: imageData) {
                     Image(uiImage: uiImage)
@@ -29,9 +38,39 @@ struct RecipeRow: View {
                 // Add an empty onTapGesture to absorb the tap gesture
             }
         }
-
     }
 }
+struct FavoriteRecipeRow: View {
+    let recipeDetails: RecipeDetails
+    let imageData: Data?
+    let removeFromFavorites: () -> Void
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Recipe Name: \(recipeDetails.name)")
+                Text("Difficulty: \(recipeDetails.difficulty)")
+                Text("Date: \(recipeDetails.date.formatted())")
+                
+                if let imageData = imageData,
+                   let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                }
+            }
+            Spacer()
+            Button(action: {
+                removeFromFavorites()
+            }) {
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.red)
+            }
+        }
+    }
+}
+
 
 struct ContentView: View {
     @State private var recipes: [(String, Data?)] = [] // Change the type to hold both recipe details and image data
@@ -41,7 +80,8 @@ struct ContentView: View {
     @State private var date = Date()
     @State var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
-
+    @State private var selectedRecipeName: String? = nil
+    @State private var selectedRecipe: RecipeDetails? = nil
     @State private var url = URL(string: "https://avatars.githubusercontent.com/u/53621588?s=400&u=1144aec8339d83995c3ae593119287106e029fe9&v=4")
 
     // Add a state variable to control the sheet presentation
@@ -119,13 +159,29 @@ struct ContentView: View {
                                     }
                                 }
                             )
-                            RecipeRow(recipe: recipe, imageData: imageData, isFavorite: isFavorite)
+                            let recipeDetails = RecipeDetails(name: name, difficulty: difficulty, date: date)
+                            RecipeRow(recipeDetails: recipeDetails, imageData: imageData, isFavorite: isFavorite)
+                                .onTapGesture {
+                                    // Set the selected recipe details when tapping on an item
+                                    selectedRecipe = recipeDetails
+                                }
                         }
                         .onDelete { indexSet in
                             recipes.remove(atOffsets: indexSet)
                         }
                     }
-                    .padding()
+                                .padding()
+                                .sheet(item: $selectedRecipe) { recipeDetails in
+                                                // Display a sheet with the recipe details
+                                                VStack {
+                                                    Text("Recipe Name: \(recipeDetails.name)")
+                                                    Text("Difficulty: \(recipeDetails.difficulty)")
+                                                    Text("Date: \(recipeDetails.date.formatted())")
+                                                    
+                                                }
+                                                .padding()
+                                            }
+
                 }
                 .padding()
                 .tabItem {
@@ -136,14 +192,16 @@ struct ContentView: View {
                 VStack {
                     List {
                         ForEach(favorites.indices, id: \.self) { index in
-                            let (recipe, imageData) = favorites[index]
-                            let isFavorite = Binding(
-                                get: { true },
-                                set: { newValue in
+                            let (_, imageData) = favorites[index]
+                            let recipeDetails = RecipeDetails(name: name, difficulty: difficulty, date: date)
+                            
+                            FavoriteRecipeRow(
+                                recipeDetails: recipeDetails,
+                                imageData: imageData,
+                                removeFromFavorites: {
                                     removeFromFavorites(index: index)
                                 }
                             )
-                            RecipeRow(recipe: recipe, imageData: imageData, isFavorite: isFavorite)
                         }
                         .onDelete { indexSet in
                             favorites.remove(atOffsets: indexSet)
@@ -152,6 +210,16 @@ struct ContentView: View {
                     .padding()
                 }
                 .padding()
+                .sheet(item: $selectedRecipe) { recipeDetails in
+                                // Display a sheet with the recipe details
+                                VStack {
+                                    Text("Recipe Name: \(recipeDetails.name)")
+                                    Text("Difficulty: \(recipeDetails.difficulty)")
+                                    Text("Date: \(recipeDetails.date.formatted())")
+                                    
+                                }
+                                .padding()
+                            }
                 .tabItem {
                     Label("Favorites", systemImage: "star.fill")
                 }
