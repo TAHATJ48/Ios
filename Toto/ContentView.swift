@@ -25,7 +25,11 @@ struct RecipeRow: View {
                 Image(systemName: isFavorite.wrappedValue ? "heart.fill" : "heart")
                     .foregroundColor(isFavorite.wrappedValue ? .red : .gray)
             }
+            .onTapGesture {
+                // Add an empty onTapGesture to absorb the tap gesture
+            }
         }
+
     }
 }
 
