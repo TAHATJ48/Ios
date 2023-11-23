@@ -151,20 +151,22 @@ struct ContentView: View {
                 .tabItem {
                     Label("Favorites", systemImage: "star.fill")
                 }
+                RandomDish()
+                .padding()
+                .tabItem {
+                    Label("Random", systemImage: "dice.fill")
+                }
             }
+            
         }
     }
 
     func addRecipe() {
         let newRecipe = "\(name), Difficulty: \(difficulty), Date: \(date)"
         recipes.append((newRecipe, selectedImageData))
-
-        // Optionally, you can clear the form fields after adding a recipe
         name = ""
         difficulty = 3
         selectedImageData = nil
-        // You can choose whether to reset the date to the current date or keep the selected date
-        // date = Date()
     }
 
     func addToFavorites(index: Int) {
